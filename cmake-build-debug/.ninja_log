@@ -1,3 +1,23 @@
 # ninja log v5
 0	368	7375039472002257	CMakeFiles/Chess.dir/main.cpp.obj	97b853a437332475
 369	467	7375039472979912	Chess.exe	a7fbc1177f936438
+3	339	7375064010721455	CMakeFiles/Chess.dir/Bitboard.cpp.obj	a394ff2fa614267a
+6	345	7375064010781304	CMakeFiles/Chess.dir/main.cpp.obj	97b853a437332475
+345	424	7375064011559484	Chess.exe	97f77f7ebaabc9d4
+2	396	7375072210249727	CMakeFiles/Chess.dir/Bitboard.cpp.obj	a394ff2fa614267a
+5	402	7375072210309563	CMakeFiles/Chess.dir/main.cpp.obj	97b853a437332475
+402	477	7375072211037614	Chess.exe	97f77f7ebaabc9d4
+2	368	7375072434903414	CMakeFiles/Chess.dir/Bitboard.cpp.obj	a394ff2fa614267a
+368	444	7375072435638969	Chess.exe	97f77f7ebaabc9d4
+2	371	7375072497996916	CMakeFiles/Chess.dir/Bitboard.cpp.obj	a394ff2fa614267a
+372	447	7375072498734714	Chess.exe	97f77f7ebaabc9d4
+2	364	7375072556024946	CMakeFiles/Chess.dir/Bitboard.cpp.obj	a394ff2fa614267a
+364	439	7375072556752998	Chess.exe	97f77f7ebaabc9d4
+2	362	7375072736786227	CMakeFiles/Chess.dir/Bitboard.cpp.obj	a394ff2fa614267a
+362	438	7375072737533942	Chess.exe	97f77f7ebaabc9d4
+2	379	7375072792794900	CMakeFiles/Chess.dir/Bitboard.cpp.obj	a394ff2fa614267a
+379	456	7375072793552760	Chess.exe	97f77f7ebaabc9d4
+2	363	7375073424286147	CMakeFiles/Chess.dir/Bitboard.cpp.obj	a394ff2fa614267a
+364	440	7375073425026285	Chess.exe	97f77f7ebaabc9d4
+3	369	7375073476213480	CMakeFiles/Chess.dir/Bitboard.cpp.obj	a394ff2fa614267a
+369	452	7375073477001377	Chess.exe	97f77f7ebaabc9d4
