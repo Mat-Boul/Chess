@@ -1,8 +1,8 @@
 #include <iostream>
-#include "Bitboard.hpp"
+#include "ChessGame.h"
 int main() {
     std::string fen  = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-    Bitboard Test('r', {1,2,3,4,5});
-    Test.printBoard();
+    ChessGame test(fen);
+    test.printGameState();
     return 0;
 }

@@ -1,5 +1,5 @@
 
-#include "Bitboard.hpp"
+#include "Bitboard.h"
 Bitboard::Bitboard(char piece, const std::vector<int>& indexes):m_Piece(piece)
 {
     for (auto &index : indexes)
@@ -17,6 +17,11 @@ const std::bitset<64> &Bitboard::getBoard() const
 char Bitboard::getPiece() const
 {
     return this->m_Piece;
+}
+
+void Bitboard::setPiece(int index)
+{
+    this->m_Board.set(index);
 }
 
 
