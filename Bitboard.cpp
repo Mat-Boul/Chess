@@ -19,6 +19,18 @@ char Bitboard::getPiece() const
     return this->m_Piece;
 }
 
+std::vector<int> Bitboard::getPieceIndexes() const
+{
+    std::vector<int> result;
+    int current_index = 0;
+    if (this->m_Board[0] == 1){result.push_back(0);}
+    while(current_index!= this->m_Board.size())
+    {
+        current_index = this->m_Board._Find_next(current_index);
+        if (current_index != this->m_Board.size()){result.push_back(current_index);}
+    }
+    return result;
+}
 void Bitboard::setPiece(int index)
 {
     this->m_Board.set(index);

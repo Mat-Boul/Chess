@@ -40,6 +40,11 @@ void ChessGame::printGameState()
     {
         std::cout<<boards.first<<std::endl;
         boards.second.printBoard();
+        std::vector<int> index = boards.second.getPieceIndexes();
+        for(auto &indexes:index)
+        {
+            std::cout<<std::endl <<indexes<<std::endl;
+        }
         std::cout<<std::endl;
         num_of_boards++;
     }
