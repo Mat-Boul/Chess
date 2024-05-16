@@ -19,7 +19,11 @@ class GUI
             GUI(int width, int height, std::string title, ChessGame& game);
             void run();
             void drawSprites();
+
+            static const int sprite_offset = 49;
         private:
+            int getIndexFromPosition(int x , int y);
+            sf::Vector2f getPositionFromIndex(int index);
             sf::RenderWindow m_MainWindow;
             std::unordered_map<char,drawableObjects> m_DrawableObjects;
             ChessGame m_Game;

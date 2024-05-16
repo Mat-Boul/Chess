@@ -28,6 +28,31 @@ ChessGame::ChessGame(const std::string &fen)
 
 }
 
+char ChessGame::get_piece_from_index(int index)
+{
+    for(auto &board : this->m_BoardStates)
+    {
+        if (board.second.getBoard().test(index))
+        {
+            return board.first;
+        }
+    }
+    return '\0';
+}
+
+void ChessGame::make_move(int source_index, int destination_index)
+{
+
+    char piece = get_piece_from_index(source_index);
+    if (this->m_BoardStates.find(piece) == this->m_BoardStates.end())
+    {
+        return;
+    }
+    this->m_BoardStates.at(piece).removePiece(source_index);
+    this->m_BoardStates.at(piece).setPiece(destination_index);
+
+}
+
 const std::unordered_map<char,Bitboard> &ChessGame::getBoardStates() const
 {
     return this->m_BoardStates;

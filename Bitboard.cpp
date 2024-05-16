@@ -36,6 +36,11 @@ void Bitboard::setPiece(int index)
     this->m_Board.set(index);
 }
 
+void Bitboard::removePiece(int index)
+{
+    this->m_Board.reset(index);
+}
+
 
 void Bitboard::printBoard()
 {

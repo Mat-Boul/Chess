@@ -19,6 +19,7 @@ class Bitboard{
         std::vector<int> getPieceIndexes() const;
         char getPiece() const;
         void setPiece(int index);
+        void removePiece(int index);
 
         //debug fonctions
         void printBoard();
