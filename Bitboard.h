@@ -14,14 +14,21 @@ class Bitboard{
 
 
     public:
+        Bitboard();
         Bitboard(char piece, const std::vector<int>& indexes);
+        Bitboard(const Bitboard& other);
         const std::bitset<64>& getBoard() const;
         std::vector<int> getPieceIndexes() const;
         char getPiece() const;
         void setPiece(int index);
         void removePiece(int index);
+        bool test(int index);
         Bitboard& operator&=(const Bitboard& other);
         Bitboard& operator|=(const Bitboard& other);
+        Bitboard& operator<<=(int pos);
+        Bitboard& operator>>=(int pos);
+        Bitboard operator>>(int pos);
+        Bitboard operator<<(int pos);
         Bitboard& operator~();
 
         //debug fonctions

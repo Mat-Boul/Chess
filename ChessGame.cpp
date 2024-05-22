@@ -4,6 +4,7 @@
 
 ChessGame::ChessGame(const std::string &fen)
 {
+    std::vector<char> piece = {'r','b','n','k','q','p','R','B','N','K','Q','P'};
     std::string pieces_fen = fen.substr(0,fen.find(' '));
     int current_index = 0;
     Bitboard empty = Bitboard('e',{});
@@ -29,7 +30,51 @@ ChessGame::ChessGame(const std::string &fen)
     }
     empty = ~empty;
     this->m_BoardStates.insert(std::make_pair('0',empty));
-    this->m_BoardStates.at('0').printBoard();
+
+    for (char &pie : piece)
+    {
+        std::vector<Bitboard> moves(64);
+        for (int i = 0 ; i <64 ; i++)
+        {
+            Bitboard curr(pie, {i});
+            switch(pie)
+            {
+                case 'P':
+                    curr >>= 8;
+                    moves[i] = curr;
+                    break;
+                case 'p':
+                    curr <<= 8;
+                    moves[i] = curr;
+                    break;
+                case 'R':
+                    int row,column;
+                    row = i/8;
+                    column = 7-row;;
+                    for (int i = 0 ; i < 8;i++)
+                    {
+                        if (i < row)
+                        {
+                            curr |= curr >>8;
+                        }
+                        else
+                        {
+                            curr |= curr<<8;
+                        }
+                    }
+                    std::cout<<"Starting Index "<< i << std::endl;
+                    curr.printBoard();
+                    std::cout<<std::endl;
+                    break;
+
+                default:
+                    break;
+
+
+            }
+        }
+        this->m_Precomp.insert(std::make_pair(pie,moves));
+    }
 }
 
 char ChessGame::get_piece_from_index(int index)
@@ -41,25 +86,29 @@ char ChessGame::get_piece_from_index(int index)
             return board.first;
         }
     }
-    return '\0';
+    return ' ';
 }
 
 void ChessGame::make_move(int source_index, int destination_index)
 {
-
+    if (source_index == destination_index)
+    {
+        return;
+    }
     char piece = get_piece_from_index(source_index);
     if (this->m_BoardStates.find(piece) == this->m_BoardStates.end())
     {
         return;
     }
+    bool condition = this->m_Precomp.at(piece)[source_index].test(destination_index) && (this->m_BoardStates.at('0').test(destination_index));
+    if (condition) {
+        this->m_BoardStates.at(piece).removePiece(source_index);
+        this->m_BoardStates.at(piece).setPiece(destination_index);
 
-    this->m_BoardStates.at(piece).removePiece(source_index);
-    this->m_BoardStates.at(piece).setPiece(destination_index);
+        this->m_BoardStates.at('0').setPiece(source_index);
+        this->m_BoardStates.at('0').removePiece(destination_index);
+    }
 
-    this->m_BoardStates.at('0').setPiece(source_index);
-    this->m_BoardStates.at('0').removePiece(destination_index);
-
-    this->m_BoardStates.at('0').printBoard();
 
 
 }

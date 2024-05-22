@@ -19,5 +19,6 @@ class ChessGame
             void printGameState();
         private:
             std::unordered_map<char,Bitboard> m_BoardStates;
+            std::unordered_map<char,std::vector<Bitboard>> m_Precomp;
         };
 #endif //CHESS_CHESSGAME_H

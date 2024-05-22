@@ -1,5 +1,6 @@
 
 #include "Bitboard.h"
+Bitboard::Bitboard():m_Piece('\0'){}
 Bitboard::Bitboard(char piece, const std::vector<int>& indexes):m_Piece(piece)
 {
     for (auto &index : indexes)
@@ -8,6 +9,7 @@ Bitboard::Bitboard(char piece, const std::vector<int>& indexes):m_Piece(piece)
     }
 
 }
+Bitboard::Bitboard(const Bitboard &other):m_Piece(other.m_Piece),m_Board(other.m_Board) {}
 
 const std::bitset<64> &Bitboard::getBoard() const
 {
@@ -54,7 +56,25 @@ void Bitboard::printBoard()
         std::cout<<this->m_Board[i];
     }
 }
-//Bitboard::Bitboard(char piece, const std::bitset<64> &bb):m_Piece(piece),m_Board(bb) {}
+
+bool Bitboard::test(int index)
+{
+    return this->m_Board.test(index);
+}
+
+Bitboard Bitboard::operator<<(int pos)
+{
+    Bitboard curr(*this);
+    curr<<=pos;
+    return curr;
+}
+
+Bitboard Bitboard::operator>>(int pos)
+{
+    Bitboard curr(*this);
+    curr>>=pos;
+    return curr;
+}
 
 Bitboard& Bitboard::operator&=(const Bitboard& other)
 {
@@ -74,3 +94,14 @@ Bitboard &Bitboard::operator~()
     return *this;
 }
 
+Bitboard &Bitboard::operator>>=(int pos)
+{
+    this->m_Board >>= pos;
+    return *this;
+}
+
+Bitboard &Bitboard::operator<<=(int pos)
+        {
+    this->m_Board <<= pos;
+    return *this;
+        }
