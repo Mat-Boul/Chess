@@ -13,13 +13,14 @@ struct drawableObjects
     sf::Sprite  sprite;
 };
 
+
 class GUI
         {
         public:
             GUI(int width, int height, std::string title, ChessGame& game);
             void run();
             void drawSprites();
-
+            const float scale_pieces = 1.5f;
             static const int sprite_offset = 49;
         private:
             int getIndexFromPosition(int x , int y);

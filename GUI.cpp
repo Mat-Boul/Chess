@@ -16,7 +16,7 @@ GUI::GUI(int width, int height, std::string title,ChessGame& game):m_MainWindow(
         this->m_DrawableObjects.at(std::toupper(ident[0])).texture.loadFromFile("C:\\Dev\\Chess\\assets\\pieces\\black_"+ident+".png");
         this->m_DrawableObjects.at(std::toupper(ident[0])).texture.setSmooth(true);
         this->m_DrawableObjects.at(std::toupper(ident[0])).sprite.setTexture(this->m_DrawableObjects.at(std::toupper(ident[0])).texture);
-        this->m_DrawableObjects.at(std::toupper(ident[0])).sprite.scale(1.5,1.5);
+        this->m_DrawableObjects.at(std::toupper(ident[0])).sprite.setScale(scale_pieces,scale_pieces);
     }
     for (std::string &ident : pieces_identifiers)
     {
@@ -25,7 +25,7 @@ GUI::GUI(int width, int height, std::string title,ChessGame& game):m_MainWindow(
         this->m_DrawableObjects.at(ident[0]).texture.loadFromFile("C:\\Dev\\Chess\\assets\\pieces\\white_"+ident+".png");
         this->m_DrawableObjects.at(ident[0]).texture.setSmooth(true);
         this->m_DrawableObjects.at(ident[0]).sprite.setTexture(this->m_DrawableObjects.at(ident[0]).texture);
-        this->m_DrawableObjects.at(ident[0]).sprite.scale(1.5,1.5);
+        this->m_DrawableObjects.at(ident[0]).sprite.setScale(scale_pieces,scale_pieces);
     }
 }
 
@@ -49,8 +49,10 @@ void GUI::drawSprites()
     {
         for (auto &index: board.second.getPieceIndexes())
         {
-            this->m_DrawableObjects.at(board.first).sprite.setPosition(getPositionFromIndex(index));
-            this->m_MainWindow.draw(this->m_DrawableObjects.at(board.first).sprite);
+            if (board.first != '0') {
+                this->m_DrawableObjects.at(board.first).sprite.setPosition(getPositionFromIndex(index));
+                this->m_MainWindow.draw(this->m_DrawableObjects.at(board.first).sprite);
+            }
         }
     }
 

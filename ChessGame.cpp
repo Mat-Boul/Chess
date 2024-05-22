@@ -6,17 +6,20 @@ ChessGame::ChessGame(const std::string &fen)
 {
     std::string pieces_fen = fen.substr(0,fen.find(' '));
     int current_index = 0;
+    Bitboard empty = Bitboard('e',{});
     for (auto &pieces : pieces_fen)
     {
         if (std::isalpha(pieces))
         {
             if(this->m_BoardStates.find(pieces) == this->m_BoardStates.end())
             {
-                this->m_BoardStates.insert(std::make_pair(pieces, Bitboard(pieces, {current_index})));
+                Bitboard curr = Bitboard(pieces,{current_index});
+                this->m_BoardStates.insert(std::make_pair(pieces, curr));
             }else
             {
                 this->m_BoardStates.at(pieces).setPiece(current_index);
             }
+            empty |= this->m_BoardStates.at(pieces);
             current_index++;
         }
         if(std::isdigit(pieces))
@@ -24,8 +27,9 @@ ChessGame::ChessGame(const std::string &fen)
             current_index += int(pieces)-48;
         }
     }
-
-
+    empty = ~empty;
+    this->m_BoardStates.insert(std::make_pair('0',empty));
+    this->m_BoardStates.at('0').printBoard();
 }
 
 char ChessGame::get_piece_from_index(int index)
@@ -48,8 +52,15 @@ void ChessGame::make_move(int source_index, int destination_index)
     {
         return;
     }
+
     this->m_BoardStates.at(piece).removePiece(source_index);
     this->m_BoardStates.at(piece).setPiece(destination_index);
+
+    this->m_BoardStates.at('0').setPiece(source_index);
+    this->m_BoardStates.at('0').removePiece(destination_index);
+
+    this->m_BoardStates.at('0').printBoard();
+
 
 }
 

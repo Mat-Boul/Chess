@@ -54,3 +54,23 @@ void Bitboard::printBoard()
         std::cout<<this->m_Board[i];
     }
 }
+//Bitboard::Bitboard(char piece, const std::bitset<64> &bb):m_Piece(piece),m_Board(bb) {}
+
+Bitboard& Bitboard::operator&=(const Bitboard& other)
+{
+    this->m_Board &= other.m_Board;
+    return *this;
+}
+
+Bitboard& Bitboard::operator|=(const Bitboard& other)
+{
+   this->m_Board |= other.m_Board;
+   return *this;
+}
+
+Bitboard &Bitboard::operator~()
+{
+    this->m_Board.flip();
+    return *this;
+}
+

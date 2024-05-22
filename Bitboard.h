@@ -20,6 +20,9 @@ class Bitboard{
         char getPiece() const;
         void setPiece(int index);
         void removePiece(int index);
+        Bitboard& operator&=(const Bitboard& other);
+        Bitboard& operator|=(const Bitboard& other);
+        Bitboard& operator~();
 
         //debug fonctions
         void printBoard();
