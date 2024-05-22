@@ -33,6 +33,7 @@ std::vector<int> Bitboard::getPieceIndexes() const
     }
     return result;
 }
+
 void Bitboard::setPiece(int index)
 {
     this->m_Board.set(index);
@@ -42,7 +43,6 @@ void Bitboard::removePiece(int index)
 {
     this->m_Board.reset(index);
 }
-
 
 void Bitboard::printBoard()
 {
@@ -62,6 +62,69 @@ bool Bitboard::test(int index)
     return this->m_Board.test(index);
 }
 
+Bitboard Bitboard::get_slides(int index)
+{
+    Bitboard curr(*this);
+    Bitboard Horizontal;
+    Bitboard Vertical;
+    int row = index/8;
+    int col = index%8;
+    for (int j = 0 ; j < 8 ; j++)
+    {
+        if (j <row)
+        {
+            Vertical |= curr >>8*(j+1);
+
+        }
+        else
+        {
+            Vertical |= curr<<8*(j-row);
+        }
+        if (j < col)
+        {
+            Horizontal |= curr >> 1*(j+1);
+        }
+        else
+        {
+            Horizontal |= curr << 1*(j-col);
+        }
+    }
+    return curr |= Vertical | Horizontal;
+}
+
+Bitboard Bitboard::get_diagonals(int index)
+{
+    Bitboard curr(*this);
+    Bitboard TL;
+    Bitboard TR;
+
+    int col = index%8;
+
+    for (int i = 0 ; i < 8 ; i++)
+    {
+        if (i < col)
+        {
+            TL |= curr >> 9*(i+1);
+            TR |= curr << 7*(i+1);
+        }
+        else
+        {
+            TL |= curr << 9*(i-col);
+            TR |= curr >> 7*(i-col);
+        }
+    }
+
+
+
+    return curr|= TL | TR;
+}
+
+Bitboard Bitboard::get_Ls(int index)
+{
+    Bitboard curr(*this);
+    return curr;
+}
+
 Bitboard Bitboard::operator<<(int pos)
 {
     Bitboard curr(*this);
@@ -73,6 +136,21 @@ Bitboard Bitboard::operator>>(int pos)
 {
     Bitboard curr(*this);
     curr>>=pos;
+    return curr;
+}
+
+Bitboard Bitboard::operator&(const Bitboard &other)
+{
+    Bitboard curr(*this);
+    curr &=other;
+    return curr;
+}
+
+
+Bitboard Bitboard::operator|(const Bitboard &other)
+{
+    Bitboard curr(*this);
+    curr |= other;
     return curr;
 }
 

@@ -48,25 +48,24 @@ ChessGame::ChessGame(const std::string &fen)
                     moves[i] = curr;
                     break;
                 case 'R':
-                    int row,column;
-                    row = i/8;
-                    column = 7-row;;
-                    for (int i = 0 ; i < 8;i++)
-                    {
-                        if (i < row)
-                        {
-                            curr |= curr >>8;
-                        }
-                        else
-                        {
-                            curr |= curr<<8;
-                        }
-                    }
-                    std::cout<<"Starting Index "<< i << std::endl;
+                case 'r':
+                    moves[i]= curr.get_slides(i);
+                    break;
+                case 'B':
+                case 'b':
+                    moves[i] = curr.get_diagonals(i);
+                    break;
+                case 'Q':
+                case 'q':
+                    moves[i] = curr.get_diagonals(i) | curr.get_slides(i);
+                    break;
+                case 'N':
+                case 'n':
+                    curr = curr.get_Ls(i);
+                    std::cout << " INDEX : " << i <<std::endl;
                     curr.printBoard();
                     std::cout<<std::endl;
                     break;
-
                 default:
                     break;
 

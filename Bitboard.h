@@ -1,6 +1,3 @@
-//
-// Created by mathi on 5/15/2024.
-//
 
 #ifndef CHESS_BITBOARD_H
 #define CHESS_BITBOARD_H
@@ -23,12 +20,17 @@ class Bitboard{
         void setPiece(int index);
         void removePiece(int index);
         bool test(int index);
+        Bitboard get_slides(int index);
+        Bitboard get_diagonals(int index);
+        Bitboard get_Ls(int index);
         Bitboard& operator&=(const Bitboard& other);
         Bitboard& operator|=(const Bitboard& other);
         Bitboard& operator<<=(int pos);
         Bitboard& operator>>=(int pos);
         Bitboard operator>>(int pos);
         Bitboard operator<<(int pos);
+        Bitboard operator &(const Bitboard& other);
+        Bitboard operator |(const Bitboard& other);
         Bitboard& operator~();
 
         //debug fonctions
